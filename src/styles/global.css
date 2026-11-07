@@ -13,12 +13,12 @@
 */
 :root {
 	color-scheme: light dark;
-	--paper: #efe7d2;
-	--paper-edge: #e6dcc0;
+	--paper: #f4e9cd;
+	--paper-edge: #eadfbf;
 	--ink: #1e2740;
 	--muted: #5e5744;
-	--rule: #d3c6a3;
-	--margin: #c4655e;
+	--rule: #e8dcb9;
+	--margin: #cf8077;
 	--link: #23428c;
 	--tape: #dcc57e;
 	--tape-ink: #2b2616;
@@ -31,7 +31,7 @@
 		--paper-edge: #141826;
 		--ink: #ece3cc;
 		--muted: #b0aa95;
-		--rule: #2a3248;
+		--rule: #232a3d;
 		--margin: #8c5252;
 		--link: #a8c0f5;
 		--tape: #5f5533;

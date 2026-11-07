@@ -31,10 +31,10 @@ const { title, description } = Astro.props;
 		</a>
 		<!-- The double margin line is the wrapper's ::before; text always sits to its right. -->
 		<div
-			class="relative mx-auto flex min-h-dvh max-w-[calc(65ch+9rem)] flex-col pr-5 pl-9 before:absolute before:inset-y-0 before:left-3.5 before:w-[5px] before:border-x before:border-margin/70 sm:pr-8 sm:pl-16 sm:before:left-8"
+			class="relative flex min-h-dvh w-full flex-col pr-5 pl-9 before:absolute before:inset-y-0 before:left-3.5 before:w-[5px] before:border-x before:border-margin/70 sm:pr-8 sm:pl-[calc(min(10vw,10rem)+min(15vw,20rem))] sm:before:left-[min(10vw,10rem)] [&>*]:max-w-[65ch]"
 		>
 			<Header />
-			<main id="main" class="max-w-[65ch] flex-1">
+			<main id="main" class="w-full flex-1">
 				<slot />
 			</main>
 			<Footer />
