@@ -11,7 +11,10 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 
 <a
 	href={href}
-	class:list={[className, { active: isActive }]}
+	class:list={[
+		'text-muted hover:text-ink hover:hand-underline aria-[current=page]:text-ink aria-[current=page]:hand-underline motion-safe:transition-colors',
+		className,
+	]}
 	aria-current={isActive ? 'page' : undefined}
 	{...props}
 >

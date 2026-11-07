@@ -1,0 +1,20 @@
+---
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	date: Date;
+	size?: 'sm' | 'lg';
+}
+
+const { date, size = 'sm' } = Astro.props;
+const sizes = { sm: 'text-2xl px-3', lg: 'text-3xl px-4' };
+---
+
+<!-- Washi-tape date stamp. Put `group` on a parent to get the small hover settle. -->
+<FormattedDate
+	date={date}
+	class:list={[
+		'inline-block -rotate-2 bg-tape bg-[image:repeating-linear-gradient(115deg,transparent_0_6px,rgb(255_255_255/0.12)_6px_12px)] font-display font-semibold leading-8 text-tape-ink [clip-path:polygon(0_0,100%_0,98%_25%,100%_50%,98%_75%,100%_100%,0_100%,2%_75%,0_50%,2%_25%)] motion-safe:transition-transform motion-safe:duration-200 motion-reduce:transition-none group-hover:-rotate-1',
+		sizes[size],
+	]}
+/>

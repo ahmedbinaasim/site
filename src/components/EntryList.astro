@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import DateStamp from './DateStamp.astro';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<!-- A diary index: date on the left margin side, title and one line beneath. -->
+<ol class="m-0 list-none p-0">
+	{posts.map((post) => (
+		<li class="group relative grid gap-x-6 pb-8 sm:grid-cols-[8rem_1fr]">
+			<div>
+				<DateStamp date={post.data.pubDate} />
+			</div>
+			<div>
+				<a
+					href={`/blog/${post.id}/`}
+					class="font-display text-3xl font-semibold leading-8 text-ink after:absolute after:inset-0 group-hover:hand-underline motion-safe:transition-colors"
+				>
+					{post.data.title}
+				</a>
+				<p class="text-muted">{post.data.description}</p>
+			</div>
+		</li>
+	))}
+</ol>

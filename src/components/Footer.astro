@@ -1,8 +1,19 @@
 ---
-import { SITE_AUTHOR } from '../consts';
+import { GITHUB_URL, SITE_AUTHOR } from '../consts';
+import PencilDivider from './PencilDivider.astro';
+
 const year = new Date().getFullYear();
 ---
 
-<footer>
-	<p>&copy; {year} {SITE_AUTHOR}</p>
+<footer class="mt-16 pb-8">
+	<PencilDivider />
+	<div class="flex flex-wrap justify-between gap-x-6 text-base leading-8 text-muted">
+		<p>&copy; {year} {SITE_AUTHOR}</p>
+		<a
+			href={GITHUB_URL}
+			class="text-link hover:hand-underline motion-safe:transition-colors"
+		>
+			GitHub
+		</a>
+	</div>
 </footer>

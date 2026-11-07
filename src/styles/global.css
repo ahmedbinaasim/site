@@ -1,141 +1,82 @@
+/* Fonts are self-hosted through Fontsource and bundled by Vite (font-display: swap). */
+@import '@fontsource-variable/newsreader/wght.css';
+@import '@fontsource-variable/newsreader/wght-italic.css';
+@import '@fontsource/caveat/latin-600.css';
+
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-
+  Design tokens. Light = paper and pen; dark = the same notebook at night.
+  The raw values switch on prefers-color-scheme; @theme exposes them as
+  utilities (bg-paper, text-ink, border-margin, ...).
+*/
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	color-scheme: light dark;
+	--paper: #efe7d2;
+	--paper-edge: #e6dcc0;
+	--ink: #1e2740;
+	--muted: #5e5744;
+	--rule: #d3c6a3;
+	--margin: #c4655e;
+	--link: #23428c;
+	--tape: #dcc57e;
+	--tape-ink: #2b2616;
+	--hand-line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='8' viewBox='0 0 80 8'%3E%3Cpath d='M0 4.5C9 2.3 15 6.2 27 4.2S45 2.4 58 5.1 72 6 80 4.5' fill='none' stroke='%2323428c' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
 }
-body {
-	font-family: var(--font-atkinson);
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
-}
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--paper: #1a1f2e;
+		--paper-edge: #141826;
+		--ink: #ece3cc;
+		--muted: #b0aa95;
+		--rule: #2a3248;
+		--margin: #8c5252;
+		--link: #a8c0f5;
+		--tape: #5f5533;
+		--tape-ink: #f1e8cf;
+		--hand-line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='8' viewBox='0 0 80 8'%3E%3Cpath d='M0 4.5C9 2.3 15 6.2 27 4.2S45 2.4 58 5.1 72 6 80 4.5' fill='none' stroke='%23a8c0f5' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
 	}
 }
 
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+@theme inline {
+	--color-paper: var(--paper);
+	--color-paper-edge: var(--paper-edge);
+	--color-ink: var(--ink);
+	--color-muted: var(--muted);
+	--color-rule: var(--rule);
+	--color-margin: var(--margin);
+	--color-link: var(--link);
+	--color-tape: var(--tape);
+	--color-tape-ink: var(--tape-ink);
+	--font-serif: 'Newsreader Variable', Charter, 'Iowan Old Style', Georgia, serif;
+	--font-display: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+}
+
+/* The one custom utility: a hand-drawn underline that survives line wraps. */
+@utility hand-underline {
+	background-image: var(--hand-line);
+	background-repeat: repeat-x;
+	background-position: 0 100%;
+	background-size: 80px 0.4em;
+	padding-bottom: 0.15em;
+	text-decoration: none;
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+@layer base {
+	html {
+		background-color: var(--paper);
+	}
+	a:focus-visible {
+		outline: 2px solid var(--link);
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+	::selection {
+		background: var(--tape);
+		color: var(--tape-ink);
+	}
 }

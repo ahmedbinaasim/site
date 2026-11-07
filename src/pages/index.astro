@@ -1,55 +1,49 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
+import EntryList from '../components/EntryList.astro';
+import PencilDivider from '../components/PencilDivider.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Base from '../layouts/Base.astro';
+import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
 
 const latest = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 5);
+
+const link = 'text-link hand-underline motion-safe:transition-[background-size] hover:bg-[length:80px_0.55em]';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`Ahmed Bin Asim - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>{SITE_TAGLINE}</h1>
-			<p>
-				I'm Ahmed Bin Asim. This is a public diary of the work: what I'm building, what breaks,
-				and what I learn about securing AI agents.
-			</p>
+<Base title={`${SITE_AUTHOR} - ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
+	<h1
+		class="mt-8 text-balance font-serif text-[2rem] font-medium leading-12 tracking-tight text-ink sm:text-5xl sm:leading-16"
+	>
+		{SITE_TAGLINE}
+	</h1>
+	<p class="mt-8">
+		I'm {SITE_AUTHOR}. This is a public diary of the work: what I'm building, what breaks, and what
+		I learn along the way.
+	</p>
+	<p class="mt-8">
+		New here? <a href="/blog/start-here/" class={link}>Start here</a>.
+	</p>
 
-			<section aria-labelledby="now">
-				<h2 id="now">What I'm doing now</h2>
-				<p>
-					I'm about to start <strong>mcp-audit</strong>, an open-source static analyzer for MCP
-					servers. It will check for tool-description injection, over-broad permissions, missing
-					authentication and unsafe command execution. Work starts on November 9, 2026 and the
-					first release is targeted for December 27, 2026. It is not released yet.
-				</p>
-				<p>A build log goes out every Friday.</p>
-			</section>
+	<PencilDivider />
 
-			<section aria-labelledby="latest">
-				<h2 id="latest">Latest entries</h2>
-				<ul>
-					{latest.map((post) => (
-						<li>
-							<FormattedDate date={post.data.pubDate} />
-							<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-							<span>{post.data.description}</span>
-						</li>
-					))}
-				</ul>
-				<p><a href="/blog/start-here/">Start here</a> if you're new.</p>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+	<section aria-labelledby="now" class="mt-8">
+		<SectionHeading id="now">What I'm doing now</SectionHeading>
+		<p>
+			I'm about to start <strong class="font-semibold">mcp-audit</strong>, an open-source static
+			analyzer for MCP servers. It will check for tool-description injection, over-broad
+			permissions, missing authentication and unsafe command execution. Work starts on November 9,
+			2026 and the first release is targeted for December 27, 2026. It is not released yet.
+		</p>
+		<p class="mt-8">A build log goes out every Friday.</p>
+	</section>
+
+	<section aria-labelledby="latest" class="mt-16">
+		<SectionHeading id="latest">Latest entries</SectionHeading>
+		<div class="mt-8">
+			<EntryList posts={latest} />
+		</div>
+	</section>
+</Base>

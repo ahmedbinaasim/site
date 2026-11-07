@@ -3,14 +3,22 @@ import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
-<header>
-	<nav aria-label="Main">
-		<a href="/" class="site-name">{SITE_TITLE}</a>
-		<ul>
+<header class="pt-8">
+	<nav
+		aria-label="Main"
+		class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between"
+	>
+		<a
+			href="/"
+			class="w-fit font-display text-4xl font-semibold leading-16 text-ink"
+		>
+			{SITE_TITLE}
+		</a>
+		<ul class="flex flex-wrap gap-x-6 text-lg leading-8">
 			<li><HeaderLink href="/">Home</HeaderLink></li>
 			<li><HeaderLink href="/blog">Entries</HeaderLink></li>
 			<li><HeaderLink href="/about">About</HeaderLink></li>
-			<li><a href="/rss.xml">RSS</a></li>
+			<li><HeaderLink href="/rss.xml">RSS</HeaderLink></li>
 		</ul>
 	</nav>
 </header>

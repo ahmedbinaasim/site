@@ -1,0 +1,43 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<!--
+		The page is a notebook: warm paper (bg-paper) with faint rules every 2rem
+		(the gradient), line-height locked to the same 2rem.
+	-->
+	<body
+		class="min-h-dvh bg-paper bg-[image:linear-gradient(to_bottom,transparent_calc(2rem-1px),var(--color-rule)_calc(2rem-1px))] bg-size-[100%_2rem] font-serif text-[1.1875rem] leading-8 text-ink antialiased"
+	>
+		<a
+			href="#main"
+			class="sr-only focus:not-sr-only focus:absolute focus:left-9 focus:top-2 focus:z-10 focus:bg-paper focus:px-3 focus:text-link"
+		>
+			Skip to content
+		</a>
+		<!-- The double margin line is the wrapper's ::before; text always sits to its right. -->
+		<div
+			class="relative mx-auto flex min-h-dvh max-w-[calc(65ch+9rem)] flex-col pr-5 pl-9 before:absolute before:inset-y-0 before:left-3.5 before:w-[5px] before:border-x before:border-margin/70 sm:pr-8 sm:pl-16 sm:before:left-8"
+		>
+			<Header />
+			<main id="main" class="max-w-[65ch] flex-1">
+				<slot />
+			</main>
+			<Footer />
+		</div>
+	</body>
+</html>

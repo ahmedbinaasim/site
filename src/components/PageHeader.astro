@@ -1,0 +1,35 @@
+---
+import DateStamp from './DateStamp.astro';
+import FormattedDate from './FormattedDate.astro';
+import PencilDivider from './PencilDivider.astro';
+
+interface Props {
+	title: string;
+	date?: Date;
+	updated?: Date;
+}
+
+const { title, date, updated } = Astro.props;
+---
+
+<header class="mb-8">
+	{date && (
+		<div class="mt-8">
+			<DateStamp date={date} size="lg" />
+		</div>
+	)}
+	<h1
+		class:list={[
+			'font-display text-balance text-5xl font-semibold leading-12 text-ink sm:text-6xl sm:leading-16',
+			!date && 'mt-8',
+		]}
+	>
+		{title}
+	</h1>
+	{updated && (
+		<p class="text-base leading-8 text-muted">
+			Updated <FormattedDate date={updated} />
+		</p>
+	)}
+	<PencilDivider />
+</header>
